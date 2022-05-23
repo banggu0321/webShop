@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title> <!-- 출력방식 -->
+<title>부서 상세보기</title> <!-- 출력방식 -->
 <style>
 h1{background-color:orange;}
 </style>

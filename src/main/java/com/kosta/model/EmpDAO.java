@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.kosta.dto.EmpVO;
+import com.kosta.dto.JobVO;
 import com.kosta.util.DBUtil;
 
 //service가 DAO를 호출
@@ -36,7 +39,7 @@ public class EmpDAO {
 			+ " JOB_ID=?, "
 			+ " SALARY=?, "
 			+ " COMMISSION_PCT=?, "
-			+ " MANAGER_ID=?, "
+			+ " MANAGER_ID=decode(?,0,null,?), "
 			+ " DEPARTMENT_ID=? "
 			+ "WHERE EMPLOYEE_ID=?";
 	static final String SQL_UPDATE_BYDEPT = "UPDATE EMPLOYEES SET "
@@ -47,12 +50,53 @@ public class EmpDAO {
 			+ "WHERE EMPLOYEE_ID =?";
 	static final String SQL_DELETE_BYDEPT = "DELETE FROM EMPLOYEES e "
 			+ "WHERE DEPARTMENT_ID =?";
+	
+	
+	static final String SQL_JOB_ALL = "select * from jobs order by 1";
+	static final String SQL_MANAGER_ALL="select employee_id, first_name "
+			+ " from employees "
+			+ " where employee_id in (select distinct manager_id from employees)";
 	Connection conn;
 	Statement st;
 	PreparedStatement pst; //바인딩변수지원 (?) - 가변
 	ResultSet rs;
 	int result;
 	
+	//1-1. 모든 jobs 조회(emplist.jsp select-option을 위한 추가사항)
+	public List<JobVO> selectJobAll() {
+		List<JobVO> joblist = new ArrayList<JobVO>();
+		conn = DBUtil.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(SQL_JOB_ALL);
+			while(rs.next()) {
+				JobVO job = new JobVO(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getInt(4));
+				joblist.add(job);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return joblist;
+	}
+	//1-2. 모든 manager 조회
+	public Map<Integer,String> selectManagerAll() {
+		Map<Integer,String> managerMap = new HashMap<Integer, String>();
+		conn = DBUtil.getConnection();
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(SQL_MANAGER_ALL);
+			while(rs.next()) {
+				managerMap.put(rs.getInt(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return managerMap;
+	}
 	//1. 모든 직원 조회
 	public List<EmpVO> selectAll() {
 		List<EmpVO> emplist = new ArrayList<EmpVO>();
@@ -70,6 +114,7 @@ public class EmpDAO {
 		}
 		return emplist;
 	}
+
 	private EmpVO makeEmp(ResultSet rs) throws SQLException {
 		EmpVO emp = new EmpVO();
 		emp.setCommission_pct(rs.getDouble("COMMISSION_PCT"));
@@ -210,7 +255,7 @@ public class EmpDAO {
 		conn = DBUtil.getConnection();
 		try {
 			pst = conn.prepareStatement(SQL_UPDATE);
-			pst.setInt(11, emp.getEmployee_id()); 
+			pst.setInt(12, emp.getEmployee_id()); 
 			pst.setString(1, emp.getFirst_name()); 
 			pst.setString(2, emp.getLast_name());
 			pst.setString(3, emp.getEmail());
@@ -220,7 +265,8 @@ public class EmpDAO {
 			pst.setDouble(7, emp.getSalary());
 			pst.setDouble(8, emp.getCommission_pct());
 			pst.setInt(9, emp.getManager_id());
-			pst.setInt(10, emp.getDepartment_id());
+			pst.setInt(10, emp.getManager_id());
+			pst.setInt(11, emp.getDepartment_id());
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

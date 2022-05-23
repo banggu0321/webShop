@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부서목록</title>
 <style>
 	table, td {
 		border:1px solid black;
@@ -23,16 +23,28 @@
 		<td>부서이름</td>
 		<td>매니저</td>
 		<td>지역번호</td>
+		<td></td>
 	</tr>
 	<c:forEach items="${deptlist}" var="dept"> <!-- var : DTO -->
 		<tr>
-			<td><a href="../html/dept.do?dept_id=${dept.department_id}">${dept.department_id}</td>
-			<td><a href="../html/dept.do?dept_id=${dept.department_id}">${dept.department_name }</td>
+			<td><a href="../html/dept.do?dept_id=${dept.department_id}">${dept.department_id}</a></td>
+			<td><a href="../html/dept.do?dept_id=${dept.department_id}">${dept.department_name }</a></td>
 			<td>${dept.manager_id }</td>
 			<td>${dept.location_id }</td>
+			<td><button class="btnDel" data-deptid="${dept.department_id}">삭제하기</button></td>
 		</tr>
 	</c:forEach>
-
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$(".btnDel").on("click",f);
+		});
+		function f(){
+			var deptid = $(this).attr("data-deptid");
+			location.href = "deptDelete.do?deptid="+deptid;
+		}
+		
+	</script>
 </body>
 </html>

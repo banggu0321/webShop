@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판조회</title>
 </head>
 <body>
 <h1>특정게시판조회</h1>

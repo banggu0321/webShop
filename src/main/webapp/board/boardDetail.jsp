@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Board의 상세내역</title>
 </head>
 <body>
 <h1>Board의 상세내역</h1>

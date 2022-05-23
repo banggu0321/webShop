@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=boardlist.do">
+<meta http-equiv="refresh" content="3;url=emplist.do">
 <title>결과</title>
 </head>
 <body>
 <h1>${message }</h1>
-<h2>${message }</h2>
 </body>
 </html>
