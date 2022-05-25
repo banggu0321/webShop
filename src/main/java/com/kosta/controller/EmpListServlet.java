@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kosta.dto.UserVO;
 import com.kosta.model.EmpService;
 
 @WebServlet("/emp/emplist.do")
@@ -16,6 +18,15 @@ public class EmpListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO)session.getAttribute("user");
+		
+		if(user==null) {
+			System.out.println("로그인하지 않음..직원정보 볼 수 없음");
+			response.sendRedirect("../html/login.do");
+			return;
+		}
+		
 		EmpService service = new EmpService();
 		request.setAttribute("emplist", service.selectAll());
 		

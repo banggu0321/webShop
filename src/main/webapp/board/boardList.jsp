@@ -15,6 +15,9 @@
 </head>
 <body>
 	<h1>게시판목록</h1>
+	<h3>
+		application 정보 얻기 : ${myname}
+	</h3>
 	<a href="boardInsert.do">게시글 작성하기</a>
 	<br><br>
 	<table>

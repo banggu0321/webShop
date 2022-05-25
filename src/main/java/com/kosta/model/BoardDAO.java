@@ -32,7 +32,7 @@ public class BoardDAO {
 	public List<BoardEmpVO> selectAllJoin() {
 		List<BoardEmpVO> postlist = new ArrayList<>();
 		BoardEmpVO board = null;
-		conn = DBUtil.getConnection();
+		conn = DBUtil.getConnection(); //CP이용해서 Connection얻기
 		try {
 			pst = conn.prepareStatement(SQL_BOARDEMP);
 			rs = pst.executeQuery();
