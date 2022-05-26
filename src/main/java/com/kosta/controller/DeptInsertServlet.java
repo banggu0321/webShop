@@ -26,7 +26,7 @@ public class DeptInsertServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		//filter로 처리함 -> request.setCharacterEncoding("utf-8");
 		
 		int deparment_id = Integer.parseInt(request.getParameter("department_id")); 
 		int manager_id = Integer.parseInt(request.getParameter("manager_id")); 

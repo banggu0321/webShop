@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kosta.dto.EmpVO;
+import com.kosta.dto.UserVO;
 import com.kosta.model.EmpService;
 import com.kosta.util.DateUtil;
 
@@ -22,6 +24,18 @@ public class EmpDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//세션 점검
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO)session.getAttribute("user");
+		System.out.println(user);
+				
+		if(user==null) {
+			System.out.println("로그인하지 않음..직원정보 볼 수 없음");
+			response.sendRedirect("../html/login.do");//주소창 바꾸기
+			return;
+		}
+				
 		String empid = request.getParameter("empid"); //par~ name에 해당하는 고
 		int i_empid = 0;
 		//System.out.println("empid=" + empid);
@@ -44,7 +58,7 @@ public class EmpDetailServlet extends HttpServlet {
 		 * String s_emp = request.getParameter("employee_id");
 		 * System.out.println(s_emp);
 		 */
-		request.setCharacterEncoding("utf-8");
+		//filter로 처리함 -> request.setCharacterEncoding("utf-8");
 		
 		EmpVO emp = makeEmp(request);
 		EmpService eService = new EmpService();

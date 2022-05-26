@@ -18,11 +18,20 @@
 	tr:first-child{
 		background-color: lightgreen;
 	}
+	h1{text-align:center; padding : 20px; margin:10px;}
+	.left{float:left; padding:0 0 0 20px }
+	.right{float:right; padding:0 20px 0 0 }
 </style>
 </head>
 <body>
 <h1>직원목록</h1>
-<a href="empInsert.do">신규등록</a>
+<hr>
+	<%-- <h2>EL문법(Expression Language)문법</h2>
+	<p>application영역의 접근 : ${appVar}</p>
+	<p>session영역의 접근 : ${sessionVar}</p>
+	<p>request영역의 접근 : ${requestVar}</p> --%>
+<div><span><a class="left" href="empInsert.do">신규등록</a></span></div>
+<div><span><span class="right">${user.user_name}님</span><a class="right" href="../logOut">로그아웃</a></span></div>
 <br><br>
 <table>
 	<tr>

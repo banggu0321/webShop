@@ -17,7 +17,7 @@ public class BoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		//filter로 처리함 -> request.setCharacterEncoding("utf-8");
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");

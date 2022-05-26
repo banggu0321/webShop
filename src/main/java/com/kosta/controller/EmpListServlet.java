@@ -18,12 +18,14 @@ public class EmpListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//세션 점검
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO)session.getAttribute("user");
+		System.out.println(user);
 		
 		if(user==null) {
 			System.out.println("로그인하지 않음..직원정보 볼 수 없음");
-			response.sendRedirect("../html/login.do");
+			response.sendRedirect("../html/login.do");//주소창 바꾸기
 			return;
 		}
 		
