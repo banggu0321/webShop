@@ -15,6 +15,7 @@
 </head>
 <body>
 	<h1>게시판목록</h1>
+	<%@ include file="../common/header.jsp" %>
 	<h3>
 		application 정보 얻기 : ${myname}
 	</h3>

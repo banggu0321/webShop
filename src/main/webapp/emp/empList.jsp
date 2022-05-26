@@ -16,8 +16,9 @@
 		border-collapse: collapse;
 		padding : 10px;}
 	tr:first-child{
-		background-color: lightgreen;
+		background-color: lightgray;
 	}
+	.table{ width:auto; margin:0 0 0 20px }
 	h1{text-align:center; padding : 20px; margin:10px;}
 	.left{float:left; padding:0 0 0 20px }
 	.right{float:right; padding:0 20px 0 0 }
@@ -31,9 +32,10 @@
 	<p>session영역의 접근 : ${sessionVar}</p>
 	<p>request영역의 접근 : ${requestVar}</p> --%>
 <div><span><a class="left" href="empInsert.do">신규등록</a></span></div>
-<div><span><span class="right">${user.user_name}님</span><a class="right" href="../logOut">로그아웃</a></span></div>
+<%-- ${pageContext.request.contextPath} --%>
+<%@ include file="../common/header.jsp" %>
 <br><br>
-<table>
+<table class="table">
 	<tr>
 		<td>직원번호</td>
 		<td>성</td>

@@ -1,4 +1,4 @@
-package com.kosta.filter;
+package com.kosta.filterListener;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * Servlet Filter implementation class EncodeFilter
  */
 //@WebFilter("/*")  모든 요청
-@WebFilter("*.do")
+//@WebFilter("*.do")
 public class EncodeFilter implements Filter {
 
     /**

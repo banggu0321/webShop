@@ -1,4 +1,4 @@
-package com.kosta.filter;
+package com.kosta.filterListener;
 
 import java.io.IOException;
 import javax.servlet.Filter;

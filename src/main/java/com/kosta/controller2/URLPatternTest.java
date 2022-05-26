@@ -24,8 +24,6 @@ public class URLPatternTest extends HttpServlet {
 		System.out.println("getServletPath : "+request.getServletPath()); 	//결과 : /first/test1
 		System.out.println("getServerPort : "+request.getServerPort()); 	//결과 : 9090
 		
-		
-		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

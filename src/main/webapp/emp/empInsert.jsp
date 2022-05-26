@@ -17,6 +17,7 @@
 </head>
 <body>
 <h1>직원 생성하기</h1>
+<%@ include file="../common/header.jsp" %>
 <form action="empInsert.do" method="post">
 	<div class="form-group">
 		<label>직원번호</label>

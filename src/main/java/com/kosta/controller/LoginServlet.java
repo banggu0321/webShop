@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd =
-		request.getRequestDispatcher("loginForm.html"); 
+		request.getRequestDispatcher("loginForm.jsp"); 
 		rd.forward(request,response);
 	}
    
@@ -47,7 +47,8 @@ public class LoginServlet extends HttpServlet {
 			//로그인 실패시 다시 로그인하도록 유도한다.
 			response.sendRedirect("login.do"); //get방식으로 가라
 		}else {
-			response.sendRedirect("../emp/emplist.do");
+			String path = (String)session.getAttribute("reqPath");
+			response.sendRedirect(path);
 		}
 		
 		
