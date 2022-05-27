@@ -11,6 +11,12 @@ public class BoardVO {
 	 private Date updatedate;
 	 
 	public BoardVO() {}
+	public BoardVO(String title, String content, int writer) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+	}
 	public BoardVO(int bno, String title, String content, int writer, Date regdate, Date updatedate) {
 		super();
 		this.bno = bno;

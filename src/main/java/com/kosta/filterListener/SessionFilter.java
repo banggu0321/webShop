@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kosta.dto.UserVO;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class SessionFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -34,12 +34,12 @@ public class SessionFilter implements Filter {
 				session.setAttribute("reqPath", req.getContextPath() + path);
 				System.out.println("로그인하지 않음..직원정보 볼 수 없음");
 				//절대경로가 바람직하다.
+				//session.setAttribute("reqPath", req.getContextPath() + "/index.jsp");
 				resp.sendRedirect(req.getContextPath() + "/html/login.do");//주소창 바꾸기
-				
 				return;
 			}
 		}else {
-			session.setAttribute("reqPath", req.getContextPath() + "/index.jsp");
+			
 		}
 		chain.doFilter(request, response);
 	}
