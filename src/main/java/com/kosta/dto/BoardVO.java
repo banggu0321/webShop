@@ -3,13 +3,32 @@ package com.kosta.dto;
 import java.sql.Date;
 
 public class BoardVO {
-	 private int bno;
-	 private String title;
-	 private String content;
-	 private int writer;
-	 private Date regdate;
-	 private Date updatedate;
+	private int bno;
+	private String title;
+	private String content;
+	private int writer;
+	private Date regdate;
+	private Date updatedate;
 	 
+	 
+	private EmpVO emp;
+	
+	public EmpVO getEmp() {
+		System.out.println("getEmp...."+emp);
+		return emp;
+	}
+	public void setEmp(EmpVO emp) {
+		System.out.println("setEmp...."+emp);
+		this.emp = emp;
+	}
+	public BoardVO(String title, String content, int writer, EmpVO emp) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.emp = emp;
+	}
+	
 	public BoardVO() {}
 	public BoardVO(String title, String content, int writer) {
 		super();

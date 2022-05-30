@@ -10,18 +10,38 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="../css/common.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <style>
   	label{display:inline-block; width:100px;}
   	.form-control{display:inline-block; width:auto;}
   </style>
+  <script>
+  	$(function(){
+  		$("#duplicateCheckBtn").click(function(){
+  	  		//alert("버튼누름");
+  	  		$.ajax({
+  	  			url:"duplicateCheck.do",
+  	  			data:{"empid":$("#employee_id").val()},
+  	  			type:"get",
+  	  			success: function(responseData){
+  	  				//중복:1, 중복안됨:0
+  	  				$("#message").html(responseData==1?"사용불가":"사용가능");
+  	  			},
+  	  			fail:function(){}
+  	  		});
+  		});
+  	});
+  </script>
 </head>
 <body>
 <h1>직원 생성하기</h1>
-<%@ include file="../common/header.jsp" %>
 <form action="empInsert.do" method="post">
 	<div class="form-group">
 		<label>직원번호</label>
-		<input class="form-control" type="number" name="employee_id">
+		<input class="form-control" type="number" name="employee_id" id="employee_id">
+		<input type="button" id="duplicateCheckBtn" value="중복체크">
+		<span id="message">!!!!</span>
 	</div>
 	<div class="form-group">
 		<label>first name</label>
