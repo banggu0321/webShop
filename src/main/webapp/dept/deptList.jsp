@@ -31,7 +31,6 @@
 </head>
 <body>
 <h1>부서목록</h1>
-<%@ include file="../common/header.jsp" %>
 <a href="deptInsert.do">신규 부서 등록</a>
 <br><br>
 <table>

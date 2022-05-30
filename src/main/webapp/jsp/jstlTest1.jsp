@@ -37,7 +37,7 @@
 			</c:if>
 	</c:forEach>
 	4. token
-		<c:set var="subject" value="자바,SQL,JSP/Servlet,Spring"/>
+		<c:set var="subject" value="자바,SQL,JSP/Servlet,Spring" />
 			<c:forTokens items="${subject }" delims="," var="ss">
 				${ss }
 			</c:forTokens>

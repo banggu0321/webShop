@@ -27,8 +27,8 @@
 	</h3>
 	<a href="boardInsert.do">게시글 작성하기</a>
 	<br><br>
-	 전체건수 : ${boardSize }<br>
-		방법2 : <c:set var="listSize" value="${boardDatas.size() }"></c:set>
+	전체건수 : ${boardSize }<br>
+	방법2 : <c:set var="listSize" value="${boardDatas.size() }"></c:set>
 	<table>
 		<tr>
 			<td>순서</td>
