@@ -51,11 +51,14 @@ public class EmpDAO {
 	static final String SQL_DELETE_BYDEPT = "DELETE FROM EMPLOYEES e "
 			+ "WHERE DEPARTMENT_ID =?";
 	
-	
+	//추가
 	static final String SQL_JOB_ALL = "select * from jobs order by 1";
 	static final String SQL_MANAGER_ALL="select employee_id, first_name "
 			+ " from employees "
 			+ " where employee_id in (select distinct manager_id from employees)";
+	//static final String SQL_SELECT_BYEMAIL = "select * from employees where email = ?";
+	static final String SQL_SELECT_BYEMAIL = "select count(*) from employees where email = ?";
+	
 	Connection conn;
 	Statement st;
 	PreparedStatement pst; //바인딩변수지원 (?) - 가변
@@ -223,6 +226,43 @@ public class EmpDAO {
 		}
 		return emp;
 	}
+	
+	//(추가-이메일중복체크)SQL_SELECT_BYEMAIL
+	public int selectByEmail(String email) {
+		int result = 0;
+		conn = DBUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYEMAIL);
+			pst.setString(1, email); 		 //첫번째 ?에 email를 넣는다.
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				result =  rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		return result;
+	}
+	/*public EmpVO selectByEmail(String email) {
+		EmpVO emp = null;
+		conn = DBUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYEMAIL);
+			pst.setString(1, email); 		 //첫번째 ?에 email를 넣는다.
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				emp =  makeEmp(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		return emp;
+	}*/
+	
 	//~DML
 	//7. insert
 	public int empInsert(EmpVO emp) {

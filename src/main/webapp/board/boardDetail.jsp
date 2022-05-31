@@ -15,6 +15,13 @@
 	작성자:<input type="text" value="${board.writer }" disabled="disabled"><br>
 	작성일:<input type="text" value="${board.regdate }" disabled="disabled"><br>
 	수정일:<input type="text" value="${board.updatedate }" readonly="readonly"><br>
+	이미지(다운로드시 이미지 클릭) <br> 
+		<a href="${pageContext.request.contextPath}/download.do?fileName=${board.pic}" >
+			<img alt="" 
+				width="300"
+				height="300"
+				src="${pageContext.request.contextPath}/uploads/${board.pic}">
+		</a><br>
 	<input type="submit" value="수정">
 	<input type="reset" value="취소">
 

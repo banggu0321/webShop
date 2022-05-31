@@ -43,6 +43,16 @@ public class EmpService {
 	public EmpVO selectById(int empid) {
 		return empDAO.selectById(empid);
 	}
+	//(추가-이메일중복체크)SQL_SELECT_BYEMAIL
+	public int selectByEmail(String email) {
+		return empDAO.selectByEmail(email);
+	}
+	/*
+	public EmpVO selectByEmail(String email) {
+		return empDAO.selectByEmail(email);
+	}
+	*/
+	
 	//~DML
 	//7. insert
 	public int empInsert(EmpVO emp) {

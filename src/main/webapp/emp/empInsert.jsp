@@ -20,13 +20,37 @@
   	$(function(){
   		$("#duplicateCheckBtn").click(function(){
   	  		//alert("버튼누름");
+  	  		var empid=$("#employee_id").val();
+  	  		if(empid==""||empid==null){
+  	  			alert("직원번호는 필수입력입니다.");
+  	  			$("#employee_id").focus();
+  	  		}
   	  		$.ajax({
   	  			url:"duplicateCheck.do",
   	  			data:{"empid":$("#employee_id").val()},
   	  			type:"get",
   	  			success: function(responseData){
   	  				//중복:1, 중복안됨:0
-  	  				$("#message").html(responseData==1?"사용불가":"사용가능");
+  	  				$("#message1").html(responseData==1?"사용불가":"사용가능");
+  	  			},
+  	  			fail:function(){}
+  	  		});
+  		});
+  		
+  		$("#duplicateEmailCheckBtn").click(function(){
+  	  		//alert("버튼누름");
+  	  		var email=$("#email").val();
+  	  		if(email==""||email==null){
+  	  			alert("이메일을 입력해주세요");
+  	  			$("#email").focus();
+  	  		}
+  	  		$.ajax({
+  	  			url:"duplicateCheck2.do",
+  	  			data:{"dataEmail":$("#email").val()},
+  	  			type:"get",
+  	  			success: function(responseData){
+  	  				//중복:1, 중복안됨:0
+  	  				$("#message2").html(responseData==1?"사용불가":"사용가능");
   	  			},
   	  			fail:function(){}
   	  		});
@@ -41,7 +65,7 @@
 		<label>직원번호</label>
 		<input class="form-control" type="number" name="employee_id" id="employee_id">
 		<input type="button" id="duplicateCheckBtn" value="중복체크">
-		<span id="message">!!!!</span>
+		<span id="message1">!!!!</span>
 	</div>
 	<div class="form-group">
 		<label>first name</label>
@@ -53,7 +77,9 @@
 	</div>
 	<div class="form-group">
 		<label>이메일</label>
-		<input class="form-control" type="text" name="email">
+		<input class="form-control" type="text" name="email" id="email">
+		<input type="button" id="duplicateEmailCheckBtn" value="중복체크">
+		<span id="message2">!!!!</span>
 	</div>
 	<div class="form-group">
 		<label>전화번호</label>
@@ -97,6 +123,14 @@
 	</div>
 	<input class="btn btn-primary" type="submit" value="생성하기">
 	<input class="btn btn-secondary" type="reset" value="취소하기">
+	<input class="btn btn-secondary" type="button" value="목록보기" id="empList">
 </form>
+<script>
+$(function(){
+	$("#empList").click(function(){
+		location.href="emplist.do";
+	});
+});
+</script>
 </body>
 </html>

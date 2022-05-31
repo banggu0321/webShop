@@ -9,8 +9,15 @@ public class BoardVO {
 	private int writer;
 	private Date regdate;
 	private Date updatedate;
+	private String pic;
 	 
 	 
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 	private EmpVO emp;
 	
 	public EmpVO getEmp() {
@@ -86,7 +93,9 @@ public class BoardVO {
 		StringBuilder builder = new StringBuilder();
 		builder.append("BoardVO [bno=").append(bno).append(", title=").append(title).append(", content=")
 				.append(content).append(", writer=").append(writer).append(", regdate=").append(regdate)
-				.append(", updatedate=").append(updatedate).append("]");
+				.append(", updatedate=").append(updatedate).append(", pic=").append(pic).append(", emp=").append(emp)
+				.append("]");
 		return builder.toString();
 	}
+	
 }

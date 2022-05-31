@@ -1,6 +1,8 @@
 package com.kosta.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kosta.dto.BoardVO;
 import com.kosta.model.BoardService;
+import com.kosta.util.UploadFileHelper;
 
 @WebServlet("/board/boardInsert.do")
 public class BoardInsertServlet extends HttpServlet {
@@ -36,8 +39,15 @@ public class BoardInsertServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int writer = Integer.parseInt(request.getParameter("writer"));
+		Map<String, Object> map = (Map<String, Object>)UploadFileHelper.uploadFile("uploads", request);
+		List<String> fileNames = (List<String>) map.get("photos");
+		String pic = fileNames.get(0);
+	
 		
 		BoardVO board = new BoardVO(0,title,content,writer,null,null);
+		board.setPic(pic);
+		
+		System.out.println(board);
 		BoardService service = new BoardService();
 		int result = service.boardInsert(board); //보내기 후 1,0
 		

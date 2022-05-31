@@ -23,7 +23,7 @@ public class BoardDAO {
 	static final String SQL_SELECT_WRITER = "SELECT * FROM TBL_BOARD WHERE writer =?";
 	static final String SQL_SELECT_TITLE = "SELECT * FROM TBL_BOARD WHERE title=?";
 	static final String SQL_SELECT_REGDATE = "SELECT * FROM TBL_BOARD WHERE regdate between ? and ?";
-	static final String SQL_INSERT = "INSERT INTO tbl_board values(seq_bno.nextval,?,?,?,sysdate,sysdate)";
+	static final String SQL_INSERT = "INSERT INTO tbl_board values(seq_bno.nextval,?,?,?,sysdate,sysdate,?)";
 	static final String SQL_UPDATE = "UPDATE tbl_board SET title =?, content=?, updatedate=sysdate WHERE bno=?";
 	static final String SQL_DELETE = "DELETE FROM tbl_board WHERE bno=?";
 	static final String SQL_BOARDEMP = "SELECT b.bno, b.title, b.content, e.FIRST_NAME ||' '|| e.LAST_NAME fullname"
@@ -72,6 +72,7 @@ public class BoardDAO {
 		post.setTitle(rs.getString("TITLE"));
 		post.setUpdatedate(rs.getDate("UPDATEDATE"));
 		post.setWriter(rs.getInt("WRITER"));
+		post.setPic(rs.getString("PIC"));
 		return post;
 	}
 	//2. 조건조회 (해당 Bno)
@@ -156,6 +157,8 @@ public class BoardDAO {
 			pst.setString(1, post.getTitle());
 			pst.setString(2, post.getContent());
 			pst.setInt(3, post.getWriter());
+			pst.setString(4, post.getPic());
+
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
