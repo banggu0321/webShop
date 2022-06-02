@@ -28,6 +28,14 @@ public class FrontController extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
+		//login
+		/*if(uri.equals("/html/login.do")) {
+			command = new LoginController();
+		}else 
+			if(uri.equals("/emp/emplist.do")) {
+			command = new EmpListController();
+		}*/
+		//emp
 		if(uri.equals("/emp/emplist.do")) {
 			command = new EmpListController();
 		}else if(uri.equals("/emp/empInsert.do")) {
@@ -37,7 +45,21 @@ public class FrontController extends HttpServlet {
 		}else if(uri.equals("/emp/empDelete.do")) {
 			command = new EmpDeleteController();
 		}
+		//board
+		else if(uri.equals("/board/boardlist.do")) {
+			command = new BoardListController();
+		}else if(uri.equals("/board/boardInsert.do")) {
+			//command = new BoardInsertController();
+		}else if(uri.equals("/board/boardDetail.do")) {
+			//command = new BoardDetailController();
+		}else if(uri.equals("/board/boardUpdate.do")) {
+			//command = new BoarddUpdateController();
+		}else if(uri.equals("/board/boardDelete.do")) {
+			//command = new BoardDeleteController();
+		}
+		
 		page = command.execute(request);
+		
 		
 		if(page.indexOf("redirect:")>=0) {
 			page = page.substring(9);

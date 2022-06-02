@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kosta.dto.BoardVO;
 import com.kosta.model.BoardService;
 
-@WebServlet("/board/boardlist.do")
+//@WebServlet("/board/boardlist.do")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
